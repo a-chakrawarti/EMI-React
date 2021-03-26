@@ -1,38 +1,219 @@
-.App {
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0px;
+  background-color: #f5f5f5;
+  color: #0a0a0a;
+}
+
+header {
+  min-width: 100vw;
+  height: 4rem;
+  color: black;
+  text-align: left;
+  background-color: #fff;
+  padding: 0.75em 0.5em;
+  box-sizing: border-box;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  font-weight: bolder;
+  font-size: 1.5rem;
+  /* text-shadow: 0 0 2px #6f74e8; */
+}
+
+footer {
+  min-width: 100vw;
+  height: 4rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
+  /* background-color: #282c34; */
+  background-color: #212121;
+  padding: 1rem 0;
+  font-size: 0.85em;
+  color: #c8c8c8;
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.home {
+  min-height: calc(100vh - 4rem - 4rem);
+  box-sizing: border-box;
+  padding-top: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flex-container {
   display: flex;
-  flex-direction: column;
+  flex-wrap: nowrap;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.emi-info {
+  max-width: 75ch;
+  height: auto;
+  padding: 1em 0.5em;
+  margin: 1.5rem;
+  flex: 40%;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(118, 118, 118, 0.15);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+  border-radius: 0.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.emi-info h3 {
+  color: #3b97fc;
+}
+
+.form-wrapper {
+  height: auto;
+  padding: 1em 0.5em;
+  margin: 1.5rem;
+  flex: 60%;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(118, 118, 118, 0.15);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+  border-radius: 0.5rem;
+}
+
+.form-item {
+  margin: 0.75rem;
+  max-height: 4rem;
+}
+
+.form-item label {
+  display: block;
+  color: #999;
+  transform: translateY(-1.5rem);
+  transform-origin: 0 0;
+  transition: all 0.3s;
+}
+
+.form-item input {
+  margin-top: 1rem;
+  padding: 0.25rem;
+  border: none;
+  border-bottom: 2px solid #111;
+  transition: border-color 0.5s ease;
+}
+
+.form-item input:focus {
+  outline: none;
+  border-color: #3b97fc;
+}
+
+.form-item input::placeholder {
+  color: transparent;
+}
+
+.form-item input:focus + label,
+.form-item input:not(:placeholder-shown) + label {
+  transform: translateY(-2.5em) scale(0.85);
+  color: #3b97fc;
+}
+
+.form-item select {
+  transform: translate(8em, -3.5em);
+  border: none;
+  outline: none;
+  padding: 0.25rem;
+  z-index: 10;
+}
+
+.form-item button {
+  background-color: #fefefe;
+  color: #3b97fc;
+  border: 2px solid #3b97fc;
+  outline: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5em;
+  transition: background-color 0.3s ease-in, border 0.3s ease-in,
+    color 0.3s ease-in;
+}
+
+.form-item button:hover {
+  background-color: #3b97fc;
+  border: 2px solid #fefefe;
+  color: #fefefe;
+}
+
+.form-item span {
+  display: block;
+}
+
+.month-select label {
+  display: inline-block;
+  margin: 0.75rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0px;
+}
+
+.result-card {
+  max-width: 40vw;
+  height: auto;
+  padding: 1em 0.5em;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+  border-radius: 0.5rem;
+}
+
+.result-card #emi-month {
+  font-size: 2em;
+}
+
+.result-card td {
+  font-size: 1.25em;
+  padding: 0.5rem 0;
+}
+
+.result-card th {
+  font-weight: normal;
+  text-align: left;
+  color: #3b97fc;
+  font-weight: 600;
+}
+
+.result-card table {
+  margin: auto;
+}
+
+.error {
+  color: red;
+  font-size: 0.75em;
+}
+
+@media only screen and (min-width: 314px) and (max-width: 850px) {
+  .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    align-items: center;
   }
-  to {
-    transform: rotate(360deg);
+
+  header {
+    font-size: 1.125rem;
+    padding: 1em 0.5em;
+  }
+
+  .result-card {
+    max-width: 65vw;
+  }
+
+  .form-wrapper {
+    width: 70vw;
+  }
+}
+
+@media only screen and (max-width: 313px) {
+  body {
+    filter: blur(50px);
   }
 }
