@@ -1,5 +1,4 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 
 const Form = (props) => {
   const { data, handleOnSubmit, handleValueChange } = props;
@@ -62,17 +61,12 @@ const Form = (props) => {
         </div> */}
 
         <div className="form-item">
-          {/* <Link
-            to={{
-              pathname: "/result",
-              state: data,
-            }}
-          >
-            ;<button type="submit">Calculate</button>
-          </Link> */}
           <button type="submit">Calculate</button>
         </div>
-        <div className="form-item error">{errorMessage}</div>
+        {errorMessage ? (
+          <div className="form-item error">{errorMessage}</div>
+        ) : null}
+        {/* <div className="form-item error">{errorMessage}</div> */}
       </form>
     </div>
   );

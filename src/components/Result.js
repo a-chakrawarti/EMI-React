@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Table } from "./Table";
 
 const Result = () => {
+  const [toggle, setToggle] = useState(false);
   const location = useLocation();
-  console.log(location);
+
+  const toggleTable = () => {
+    setToggle(!toggle);
+  };
 
   const {
     principalAmount,
@@ -21,25 +26,27 @@ const Result = () => {
     } else {
       tenure = timePeriod * 12;
     }
-    console.log("Loan Amount: ", principalAmount);
-    console.log("Tenure in months: ", tenure);
 
     let interest = principalAmount * (rateOfInterest / 100);
 
-    console.log("Interest/Annum: ", interest);
-
     let interestFull = (interest * tenure) / 12;
-    console.log("Interest to pay through-out the tenure: ", interestFull);
 
     return [
-      (Number(principalAmount) +
-        (Number(principalAmount) * (rateOfInterest / 100) * tenure) / 12) /
-        tenure,
+      (Number(principalAmount) + Number(interestFull)) / tenure,
       interestFull,
+      tenure,
     ];
   };
 
-  const [EMI, interestFull] = calculateEMI();
+  const [EMI, interestFull, tenure] = calculateEMI();
+
+  const tableData = {
+    tenure,
+    EMI,
+    fullAmount: Number(principalAmount) + Number(interestFull),
+  };
+
+  console.log("Table Data", tableData);
   return (
     <div className="home">
       <div className="result-card">
@@ -49,13 +56,13 @@ const Result = () => {
               <th>EMI / month</th>
             </tr>
             <tr>
-              <td id="emi-month">₹{EMI.toFixed(3)}</td>
+              <td id="emi-month">₹{EMI.toFixed(2)}</td>
             </tr>
             <tr>
               <th id="with-interest">Total Amount with Interest</th>
             </tr>
             <tr>
-              <td>₹{(Number(principalAmount) + interestFull).toFixed(3)}</td>
+              <td>₹{(Number(principalAmount) + interestFull).toFixed(2)}</td>
             </tr>
             <tr>
               <th>Loan Amount</th>
@@ -78,6 +85,11 @@ const Result = () => {
           </tbody>
         </table>
       </div>
+      <div
+        onClick={toggleTable}
+        className={toggle ? "toggle-table-up" : "toggle-table-down"}
+      ></div>
+      {toggle ? <Table tableData={tableData} /> : null}
     </div>
   );
 };

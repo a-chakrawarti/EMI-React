@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router-dom";
 
 import Form from "./Form";
 
@@ -14,6 +14,7 @@ const Home = () => {
 
   const [data, setData] = useState(initialValue);
   const [goToResult, setGoToResult] = useState(false);
+  const history = useHistory();
 
   const handleValueChange = (event) => {
     const { id, value } = event.target;
@@ -31,7 +32,6 @@ const Home = () => {
       ...data,
       errorMessage: "",
     };
-    // console.log("Value", data.principalAmount);
     if (
       Number(data.principalAmount) <= 0 ||
       Number(data.rateOfInterest) <= 0 ||
@@ -48,25 +48,11 @@ const Home = () => {
       setData(newValue);
       setGoToResult(true);
     }
-    // console.log("New Value", newValue);
-    // console.log("Data", data);
   };
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
     validate();
-    console.log(goToResult);
-    if (goToResult) {
-      console.log("Inside redirect");
-      return (
-        <Redirect
-          to={{
-            pathname: "/result",
-            state: data,
-          }}
-        />
-      );
-    }
   };
 
   return (
@@ -91,6 +77,15 @@ const Home = () => {
           handleValueChange={handleValueChange}
         />
       </div>
+      {goToResult ? history.push("/result", data) : null}
+      {/* {goToResult ? (
+        <Redirect
+          to={{
+            pathname: "/result",
+            state: data,
+          }}
+        />
+      ) : null} */}
     </div>
   );
 };
